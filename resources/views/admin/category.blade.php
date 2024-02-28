@@ -2,20 +2,20 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
     @include('admin.css')
     <style>
+        .form-control {
+            color: black;
+            font-weight: bold;
+        }
     </style>
 
 </head>
 
 <body>
     <div class="container-scroller">
-        <!-- partial:partials/_sidebar.html -->
         @include('admin.sidebar')
-        <!-- partial -->
         @include('admin.header')
-        <!-- partial -->
         <div class="main-panel">
             <div class="content-wrapper">
                 @if(Session::has('message'))
@@ -27,14 +27,13 @@
 
                 @endif
                 @if($errors->any('error'))
-                 <!-- turn this into tailwind classes  -->
                 <div class="alert alert-danger">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     {{ $errors->first() }}
                 </div>
                 @endif
-            
-            
+
+
 
                 <div class="row">
                     <div class="col-lg-12 grid-margin stretch-card">
@@ -51,7 +50,6 @@
                                             placeholder="Category Name" name="name">
                                     </div>
                                     <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                    <!-- <button class="btn btn-light">Cancel</button> -->
                                 </form>
                             </div>
                         </div>
@@ -59,7 +57,6 @@
                 </div>
 
 
-                <!-- category tables -->
                 <div class="row">
                     <div class="col-lg-12 mt-10 grid-margin stretch-card">
                         <div class="card">
@@ -92,10 +89,8 @@
                                                     {{$category->category_name}}
                                                 </td>
                                                 <td>
-                                                    <a 
-                                                    onclick="return confirm('Are you sure you want to delete this category?')"
-                                                    href="{{url('delete_category' , $category->id)}}">Delete</a>
-                                                    <!-- <a href="">Update</a> -->
+                                                    <a onclick="return confirm('Are you sure you want to delete this category?')"
+                                                        href="{{url('delete_category' , $category->id)}}">Delete</a>
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -104,10 +99,7 @@
 
                                 </div>
                             </div>
-                            <!-- container-scroller -->
-                            <!-- plugins:js -->
                             @include('admin.scripts')
-                            <!-- End custom js for this page -->
 </body>
 
 </html>

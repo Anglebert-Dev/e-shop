@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -56,10 +57,58 @@ class AdminController extends Controller
         // }
     }
 
-    // view_product function validated well 
     public function view_product()
     {
-        return view('admin.products');
+        $category = Category::all();
+        return view('admin.products', compact('category'));
+    }
+
+
+    public function add_product(Request $request)
+    {
+        // Validate incoming request data
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'discount_price' => 'nullable|numeric',
+            'quantity' => 'required|integer',
+            'category' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+        ]);
+
+        // // Handle file upload for image
+        // if ($request->hasFile('image')) {
+        //     $image = $request->file('image');
+        //     $imageName = time() . '_' . $image->getClientOriginalName();
+        //     $image->storeAs('public/images/products', $imageName);
+        // } else {
+        //     $imageName = null; 
+        // }
+
+        // Create a new product instance
+        $product = new Product();
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->discount_price = $request->discount_price ?? null;
+        $product->quantity = $request->quantity;
+        $product->category = $request->category;
+
+        $image = $request->image;
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $request->image->move('products' , $imageName);
+        $product->image = $imageName;
+
+        $product->save();
+
+        return redirect()->back()->with(['message' => 'Product added successfully']);
+    }
+
+    public function show_product()
+    {
+        $products = Product::all();
+        return view('admin.show_product', compact('products'));
     }
 
 }
