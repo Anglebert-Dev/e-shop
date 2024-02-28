@@ -74,7 +74,7 @@ class AdminController extends Controller
             'discount_price' => 'nullable|numeric',
             'quantity' => 'required|integer',
             'category' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // // Handle file upload for image
@@ -97,7 +97,7 @@ class AdminController extends Controller
 
         $image = $request->image;
         $imageName = time() . '_' . $image->getClientOriginalName();
-        $request->image->move('products' , $imageName);
+        $request->image->move('products', $imageName);
         $product->image = $imageName;
 
         $product->save();
@@ -110,5 +110,21 @@ class AdminController extends Controller
         $products = Product::all();
         return view('admin.show_product', compact('products'));
     }
+
+    public function delete_product($id)
+    {
+        $product = Product::find($id);
+
+        $product->delete();
+        return redirect()->back()->with(['message' => 'Product deleted successfully']);
+    }
+
+    public function update_product($id)
+    {
+        $product = Product::find($id);
+        $categories = Category::all();
+        return view('admin.update_product', compact('product'));
+    }
+
 
 }

@@ -31,6 +31,13 @@
 
         <div class="main-panel ">
             <div class="content-wrapper">
+            @if(Session::has('message'))
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{ Session::get('message') }}
+                </div>
+
+                @endif
                 <div class="row">
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
@@ -47,6 +54,8 @@
                                                 <th>Product Quantity</th>
                                                 <th>Product Category</th>
                                                 <th>Product Image</th>
+                                                <th>Action</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -60,6 +69,13 @@
                                                 <td>{{$product->quantity}}</td>
                                                 <td>{{$product->category}}</td>
                                                 <td><img src="{{asset('products/'.$product->image)}}" alt="image"></td>
+                                                <td>
+                                                    <a onclick="return confirm('Are you sure you want to delete this category?')"
+                                                        href="{{url('delete_product' , $product->id)}}">Delete</a>
+                                                </td>
+                                                <td>
+                                                    <a href="{{url('update_product' , $product->id)}}">Update</a>
+                                                </td>
                                             </tr>
                                             @endforeach
 

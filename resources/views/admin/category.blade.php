@@ -18,22 +18,20 @@
         @include('admin.header')
         <div class="main-panel">
             <div class="content-wrapper">
-                @if(Session::has('message'))
+                
+            @if(Session::has('message'))
                 <div class="alert alert-success">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     {{ Session::get('message') }}
                 </div>
 
-
                 @endif
-                @if($errors->any('error'))
+                <!-- @if($errors->any('error'))
                 <div class="alert alert-danger">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     {{ $errors->first() }}
                 </div>
-                @endif
-
-
+                @endif -->
 
                 <div class="row">
                     <div class="col-lg-12 grid-margin stretch-card">
