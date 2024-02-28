@@ -13,7 +13,8 @@ class AdminController extends Controller
 {
     public function view_category()
     {
-        return view('admin.category');
+        $categories = Category::all();
+        return view('admin.category', compact('categories'));
     }
 
     public function add_category(Request $request)
@@ -38,6 +39,27 @@ class AdminController extends Controller
         }
 
 
+    }
+
+
+    // delete_category function with validations 
+    public function delete_category($id)
+    {
+        $category = Category::find($id);
+        if ($category) {
+            $category->delete();
+            // return redirect()->back()->with(['message' => 'Category deleted successfully']);
+            return redirect()->back();
+        }
+        // else {
+        //     return redirect()->back()->with(['error' => 'Category not found']);
+        // }
+    }
+
+    // view_product function validated well 
+    public function view_product()
+    {
+        return view('admin.products');
     }
 
 }
