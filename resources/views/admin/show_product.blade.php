@@ -4,22 +4,22 @@
 <head>
     @include('admin.css')
     <style>
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 4px;
-        }
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 7px;
+    }
 
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
 
-        ::-webkit-scrollbar-thumb {
-            background: #6c7293;
-        }
+    ::-webkit-scrollbar-thumb {
+        background: #6c7293;
+    }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #6c7293;
-        }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #6c7293;
+    }
     </style>
 
 </head>
@@ -31,7 +31,7 @@
 
         <div class="main-panel ">
             <div class="content-wrapper">
-            @if(Session::has('message'))
+                @if(Session::has('message'))
                 <div class="alert alert-success">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     {{ Session::get('message') }}
@@ -68,13 +68,14 @@
                                                 <td>{{$product->discount_price}}</td>
                                                 <td>{{$product->quantity}}</td>
                                                 <td>{{$product->category}}</td>
-                                                <td><img src="{{asset('products/'.$product->image)}}" alt="image"></td>
-                                                <td>
-                                                    <a onclick="return confirm('Are you sure you want to delete this category?')"
-                                                        href="{{url('delete_product' , $product->id)}}">Delete</a>
+                                                <td><img src="{{asset('products/' . $product->image)}}" alt="image">
                                                 </td>
                                                 <td>
-                                                    <a href="{{url('update_product' , $product->id)}}">Update</a>
+                                                    <a onclick="return confirm('Are you sure you want to delete this category?')"
+                                                        href="{{url('delete_product', $product->id)}}">Delete</a>
+                                                </td>
+                                                <td>
+                                                    <a href="{{url('update_product', $product->id)}}">Update</a>
                                                 </td>
                                             </tr>
                                             @endforeach

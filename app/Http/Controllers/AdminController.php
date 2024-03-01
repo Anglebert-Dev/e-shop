@@ -122,9 +122,42 @@ class AdminController extends Controller
     public function update_product($id)
     {
         $product = Product::find($id);
-        $categories = Category::all();
-        return view('admin.update_product', compact('product'));
+        $category = Category::all();
+        return view('admin.update_product', compact('product', 'category'));
     }
 
+    // update_product_api by id
+    public function update_product_api(Request $request, $id)
+    {
+        // Validate incoming request data
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required|numeric',
+            'discount_price' => 'nullable|numeric',
+            'quantity' => 'required|integer',
+            'category' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
+        // Create a new product instance
+        $product = Product::find($id);
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->discount_price = $request->discount_price ?? null;
+        $product->quantity = $request->quantity;
+        $product->category = $request->category;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $request->image->move('products', $imageName);
+            $product->image = $imageName;
+        }
+
+        $product->save();
+
+        return redirect()->back()->with(['message' => 'Product updated successfully']);
+    }
 }
