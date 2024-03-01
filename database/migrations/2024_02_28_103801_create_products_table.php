@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('image')->nullable();
             $table->integer('quantity')->default(0);
             $table->decimal('price', 8, 2);
-            $table->decimal('discount_price', 8, 2);
+            $table->decimal('discount_price', 8, 2)->nullable();
             // $table->boolean('status')->default(1);
             // $table->softDeletes();
             // $table->timestamp('published_at')->nullable();

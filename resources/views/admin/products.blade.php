@@ -53,8 +53,8 @@
                                             name="price">
 
                                         <label class="m-2">Product Discount Price</label>
-                                        <input type="text" class="form-control" required
-                                            placeholder="Product Discount Price" name="discount_price">
+                                        <input type="text" class="form-control" placeholder="Product Discount Price"
+                                            name="discount_price">
 
                                         <label class="m-2">Product Quantity</label>
                                         <input type="text" class="form-control" required placeholder="Product Quantity"
