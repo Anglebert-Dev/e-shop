@@ -69,6 +69,7 @@
 
                                         </select>
 
+
                                         <label class="m-2">Product Image</label>
                                         <input type="file" class="form-control" required placeholder="Product Image"
                                             name="image">
