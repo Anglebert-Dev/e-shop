@@ -15,9 +15,18 @@
                             <a href="{{url('product_details', $products->id)}}" class="option1">
                                 Details
                             </a>
-                            <a href="" class="option2">
-                                Buy Now
-                            </a>
+                            <form action="{{url('add_cart',$products->id)}}" method="post">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="number" name="quantity" value="1" min="1"
+                                            style="width:100px; height:50px ">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="submit" value="Add To Cart">
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="img-box">
@@ -28,7 +37,7 @@
                             {{$products->title}}
                         </h5>
                         @if($products->discount_price != null)
-                        <h6 style="color:red">
+                        <h6 style=" color:red">
                             Discount Price
                             <br>
                             {{$products->discount_price}}
