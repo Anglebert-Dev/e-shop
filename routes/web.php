@@ -43,3 +43,8 @@ route::get('/update_product/{id}', [AdminController::class, 'update_product']);
 route::post('/update_product_api/{id}', [AdminController::class, 'update_product_api']);
 route::get('/product_details/{id}', [HomeController::class, 'product_details']);
 route::post('/add_cart/{id}', [HomeController::class, 'add_cart']);
+route::get('/show_cart', [HomeController::class, 'show_cart']);
+// cart count
+Route::get('/cart/count', [HomeController::class,'getCartCount']);
+route::get('/delete_cart/{id}', [HomeController::class, 'delete_cart']);
+route::get('/checkout', [HomeController::class, 'checkout']);

@@ -64,4 +64,19 @@ class HomeController extends Controller
         }
     }
 
+    //get cart count api
+    public function getCartCount()
+    {
+        $count = Cart::where('user_id', auth()->id())->count();
+        return response()->json(['count' => $count]);
+    }
+
+    // show cart
+    public function show_cart()
+    {
+        $user = Auth::user();
+        $cart = Cart::where('user_id', $user->id)->get();
+        return view('home.show_cart', compact('cart'));
+    }
+
 }
